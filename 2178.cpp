@@ -4,8 +4,8 @@
 using namespace std;
 
 int arr[1001][1001];
-int dx[4] = {-1, 1, -1, 1};
-int dy[4] = {1, 1, -1, -1};
+int dx[4] = {-1, 1, 0, 0};
+int dy[4] = {0, 0, 1, -1};
 
 int main()
 {
@@ -14,7 +14,7 @@ int main()
     int M, N;
     cin >> N >> M;
     cin.get();
-    for (int n = 1; n < +N; n++)
+    for (int n = 1; n <=N; n++)
     {
         for (int m = 1; m <= M; m++)
         {
