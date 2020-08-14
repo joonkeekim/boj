@@ -1,40 +1,38 @@
 #include <iostream>
 using namespace std;
 
-int arr[2179][2179];
-int c1 = 0;
-int c0 = 0;
-int cm = 0;
-void dq(int s, int e)
+int arr[2188][2188];
+int cnt[3];
+
+bool is(int s1, int s2, int len)
 {
-    int t = arr[s][e];
-    bool flag = true;
-    for (int i = s; i <= e; i++)
+    int tmp = arr[s1][s2];
+    for (int i = 0; i < len; i++)
     {
-        for (int j = s; j <= e; j++)
+        for (int j = 0; j < len; j++)
         {
-            if (t != arr[i][j])
-            {
-                for (int k = 1; k <= 3; k++)
-                {
-                    for (int q = 1; q <= 3; q++)
-                    {
-                        dq((e-s+1)*k,(e-s+1)*q);
-                    }
-                }
-                flag = false;
-                break;
+            if(arr[s1+i][s2+j] != tmp){
+                return false;
             }
         }
     }
-    if (flag)
+    return true;
+}
+
+void ans(int s1, int s2, int len)
+{
+    if (is(s1, s2, len))
     {
-        if (t == 1)
-            c1 += (e - s + 1) * (e - s + 1);
-        else if (t == 0)
-            c0 += (e - s + 1) * (e - s + 1);
-        else
-            cm += (e - s + 1) * (e - s + 1);
+        cnt[arr[s1][s2] + 1] += 1;
+        return;
+    }
+    int tmp = len / 3;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            ans(s1+tmp*i,s2+tmp*j,tmp);
+        }
     }
 }
 
@@ -52,6 +50,9 @@ int main()
             cin >> arr[i][j];
         }
     }
-    dq(1, N);
+    ans(1, 1, N);
+
+    cout<<cnt[0]<<"\n"<<cnt[1]<<"\n"<<cnt[2]<<"\n";
+
     return 0;
 }
