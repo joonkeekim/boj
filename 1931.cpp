@@ -41,7 +41,7 @@ int main()
             cnt++;
         }
     }
-
+    
     printf("%d\n", cnt);
     return 0;
 
